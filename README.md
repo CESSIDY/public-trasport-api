@@ -39,3 +39,19 @@ sudo apt install sqlite3
 
 # API using
 1. go to: http://localhost:5000/api/docs/#
+
+### user: 
+{
+  "email": "user@mail.com",
+  "password": "user_password"
+}
+### admin: 
+{
+  "email": "admin@mail.com",
+  "password": "admin_password"
+}
+### conductor:
+{
+  "email": "conductor@mail.com",
+  "password": "conductor_password"
+}

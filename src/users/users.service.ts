@@ -15,7 +15,7 @@ export class UsersService {
     
     async createUser(dto: CreateUserDto) {
         const user = await this.userRepository.create(dto);
-        const role = await this.roleService.getRoleByValue("CONDUCTOR")
+        const role = await this.roleService.getRoleByValue("USER")
         user.roles = [role]
         user.cash_amount = this.defaultMoney
         
