@@ -45,14 +45,18 @@ export class RoutsService {
     }
 
     async getRoute(routeId: string){
-        console.log(routeId)
         const route = await this.routeRepository.findOne({
             where: {
                 id: routeId,
             },
             relations: ['routsLocations'] 
         });
-        console.log(route)
         return route;
+    }
+
+    async getAllRoutes(){
+        const routes = await this.routeRepository.find();
+
+        return routes;
     }
 }

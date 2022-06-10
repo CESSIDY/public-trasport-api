@@ -25,7 +25,16 @@ export class RoutsController {
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Get("/get/:id")
-    getAll(@Param('id') route_id: string, @Request() req) {
+    get(@Param('id') route_id: string, @Request() req) {
         return this.routsService.getRoute(route_id);
+    }
+
+    @ApiOperation({summary: 'Get all routes'})
+    @ApiResponse({status: 200, type: [Route], description: 'Need to be: ADMIN'})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
+    @Get("/get-all")
+    getAll(@Request() req) {
+        return this.routsService.getAllRoutes();
     }
 }
