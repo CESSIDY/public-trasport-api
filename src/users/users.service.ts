@@ -28,7 +28,9 @@ export class UsersService {
     }
 
     async getUserByEmail(email: string) {
-        const user = await this.userRepository.findOneBy({email: email})
+        const user = await this.userRepository.findOne({
+            where: {email: email},
+            relations: ['roles']})
         return user;
     }
 
@@ -43,7 +45,10 @@ export class UsersService {
     // }
 
     async ban(dto: BanUserDto) {
-        const user = await this.userRepository.findOneBy({id: dto.userId});
+        const user = await this.userRepository.findOne({
+            where: {id: dto.userId},
+            relations: ['roles']})
+        //.findOneBy({id: dto.userId}, relations: ['activeUsers', 'messages', 'messages.fromUser']);
         if (!user) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
