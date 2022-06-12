@@ -21,7 +21,7 @@ export class TicketsController {
         return this.ticketsService.buyTicket(ticketDto, req.user);
     }
 
-    @ApiOperation({summary: 'Ticket verification'})
+    @ApiOperation({summary: 'Check your own ticket'})
     @ApiResponse({status: 200, type: Ticket, description: 'Need to be authorization'})
     @UseGuards(JwtAuthGuard)
     @Get('/check/:hashID')
