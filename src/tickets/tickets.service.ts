@@ -26,6 +26,9 @@ export class TicketsService {
     async buyTicket(dto: BuyTicketDto, user: User) {
         var today = new Date();
         var ticket_cost = dto.minutes * this.priceForMinute
+        if(!dto.race_number){
+            throw new HttpException('Please enter race number!', HttpStatus.BAD_REQUEST)
+        }
         if (this.PayForTicket(user, ticket_cost)){
             var expired_date = new Date(today.getTime() + dto.minutes*60000);
 
@@ -83,8 +86,10 @@ export class TicketsService {
             where: {
                 hash_id: hashID,
             },
+            relations: ['owner']
           });
-        if (ticket.owner == user){
+
+        if (ticket.owner.id == user.id){
             return await this.getViewTicket(ticket);
         }
         throw new HttpException("It's not your ticket", HttpStatus.BAD_REQUEST)
